@@ -66,7 +66,8 @@ stories.</li>
 software guesses how old the face looks, and then it is thrown away. Nobody at
 gassed looks at it. It is not saved on your phone, on our computers, or on
 theirs. What we keep is three things: that you did the check, the birthday you
-gave, and whether it passed.</p>
+gave, and whether it passed. The app asks you to agree to this on screen, before
+the camera opens. You can say <em>Not now</em> and nothing is taken.</p>
 <p><strong>The one thing we keep even if you delete your account</strong></p>
 <p>We keep a scrambled version of your phone number and your birthday. It is not
 readable — it cannot be turned back into your number. We keep it so that
@@ -89,9 +90,12 @@ you find out later.</p>
 account that cast it. The count stays. Who cast it is gone — from us too.</p>
 <p><strong>The paid hint</strong></p>
 <p>If you win a poll, you can pay (or spend gas) for one clue about one person who
-voted for you. The clue is one of: their year, their subject, their gender, or
-their first initial. We only use a clue if at least five people at your school
-share it. You get one clue per win, ever. It never tells you their name.</p>
+voted for you. The clue is one of: their year, their gender, or their first
+initial. We only use a clue if at least five people at your school share it.
+You get one clue per win, ever. It never tells you their name. Hints stop 90
+days after a win: by then we have removed the link between the vote and the
+person who cast it, so there is nothing left to give a clue about, and the app
+offers nothing to buy.</p>
 <p>The clue comes attached to that person&#39;s random voting handle, like &quot;Velvet
 Comet&quot;. That handle stays the same until they change it. So if you win several
 polls and the same person votes each time, the clues can pile up against one
@@ -117,7 +121,10 @@ delayed than let something harmful past.</p>
 no email to send.</li>
 <li>Change your handle: Settings → Shuffle.</li>
 <li>Stop people making polls about you: Settings.</li>
+<li>Let, or don&#39;t let, friends get poll ideas from your survey answers: it is off
+unless you turn it on (Settings → Polls about you).</li>
 <li>Block someone, or report anything, from the app.</li>
+<li>Read this notice in the app: Settings → Privacy notice.</li>
 </ul>
 <p><strong>If you are not happy</strong></p>
 <p>Tell us first: <strong><a href="mailto:support@getgassed.app">support@getgassed.app</a></strong>. Put <strong>My data</strong> at the start of the
@@ -216,7 +223,7 @@ table are part of it.</p>
 <tr>
 <td>9</td>
 <td>Suggest poll prompts about a classmate</td>
-<td>That person&#39;s survey answers</td>
+<td>That person&#39;s survey answers — only if they have switched prompt suggestions on. Off by default (migration 0065; note J)</td>
 <td>Legitimate interests — Article 6(1)(f). See note J</td>
 <td>The survey answers stay until that person deletes their account</td>
 <td>Google (Gemini). The classmate who asked never sees the answers, only the suggestions</td>
@@ -256,7 +263,7 @@ table are part of it.</p>
 <tr>
 <td>14</td>
 <td>Act on reports and enforce the rules</td>
-<td>What you reported and why; actions taken against an account; whether an account is warned, limited or banned. A ban is also written, as a date, onto the scrambled-number record in row 3</td>
+<td>What you reported and why; for an intimate-image report, the two statements you confirmed — that the image shows you (or someone you are responsible for) and that you did not agree to it being shared — stored with the report and kept for the same 24 months; actions taken against an account; whether an account is warned, limited or banned. A ban is also written, as a date, onto the scrambled-number record in row 3</td>
 <td>Legal obligation and legitimate interests, as row 8</td>
 <td>Reports and moderators&#39; actions: 24 months, longer only while a report is still open or under a legal hold — note P. Whether you are warned, limited or banned: until a person lifts it or you delete your account. The ban date in row 3 goes after 12 months</td>
 <td>Our moderators</td>
@@ -275,7 +282,14 @@ nothing&quot;. The only thing sent alongside it is an internal reference number 
 the check — never your name, phone number or account id. The reply is read once,
 turned into pass/fail and one of three broad age bands (13–15, 16–17, 18+), and
 discarded. There is no column anywhere in the database for a photo, for an
-estimated age, or for a vendor session id. <span class="tbc">[to be confirmed before launch]</span></p>
+estimated age, or for a vendor session id. Consent is taken on the screen
+immediately before the camera: it states that one photo is taken, that it goes
+to Didit whose software estimates the age, that Didit deletes it and we never
+store or show it, that we keep only the result and the birthday, that it is used
+for the age check only, and that a document appeal is checked by a person and
+deleted after the decision. The only way on is <em>I understand, take the photo</em>;
+<em>Not now</em> takes nothing. The same consent line precedes the document camera in
+an appeal, whose button is <em>I understand, open camera</em>. <span class="tbc">[to be confirmed before launch]</span></p>
 <p><strong>C — The lawful basis for the age check.</strong> <span class="tbc">[to be confirmed before launch]</span></p>
 <p><strong>D — The ledger, plainly.</strong> When you attempt an age check, we work out two
 keyed hashes: one from your phone number, one from your phone number plus the
@@ -337,7 +351,7 @@ written, by an hourly job (migration 0063) — the same period as note P, so a
 decision and the verdict behind it go together. A row is kept longer only
 while it is still waiting for a person to look at it, or while a report about
 the same content is open or under a legal hold.</p>
-<p><strong>J — Prompt suggestions.</strong> When you start making a poll about a classmate, their survey answers — their own words about themselves — are sent to Google&#39;s Gemini so it can suggest which of the 40 fixed prompts suits them. The classmate never sees the answers.</p>
+<p><strong>J — Prompt suggestions.</strong></p>
 <p><strong>K — IP addresses.</strong> The rate limiter writes a row keyed on your IP address
 when you search for a school without being signed in. Rows are deleted after
 2 days by an hourly job.</p>
@@ -439,6 +453,12 @@ advertising identifiers, no ad SDKs and no analytics SDKs in the app.</p>
 <h2 id="part-5-your-rights">Part 5 — Your rights</h2>
 <p>You have these rights over your own data. They are free to use. We have to
 answer within one month.</p>
+<p>If you think we have handled your information badly, you can complain to us
+directly: the route, the 30-day acknowledgement and what happens next are on
+our support page (<code>docs/legal/COMPLAINTS_AND_CONTACT.md</code> §11, &quot;Complaining
+about how we handle your personal information&quot;), and you can go to the ICO at
+any time as well. This notice is one tap away inside the app, under Settings →
+Privacy notice.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -464,7 +484,7 @@ answer within one month.</p>
 </tr>
 <tr>
 <td><strong>Object</strong> to processing based on legitimate interests</td>
-<td>Email <a href="mailto:support@getgassed.app">support@getgassed.app</a> with <strong>My data</strong> at the start of the subject line</td>
+<td>Email <a href="mailto:support@getgassed.app">support@getgassed.app</a> with <strong>My data</strong> at the start of the subject line. One objection needs no email: prompt suggestions from your survey answers are off unless you turn them on, and the switch is in Settings → Polls about you (&quot;Let friends get poll ideas from my survey answers&quot;) — off, your answers are never sent to Google (note J)</td>
 </tr>
 <tr>
 <td><strong>Restrict</strong> processing while something is disputed</td>
@@ -497,7 +517,7 @@ moment you ask (<code>src/app/api/account/export+api.ts</code>):</p>
 <li><strong>People you blocked.</strong></li>
 <li><strong>Devices registered for push</strong> — platform and notification settings, not the token.</li>
 <li><strong>Age checks and appeals</strong> — each attempt, the birthday tested, the outcome and the rule applied. No selfie, estimate or document is stored, and the appeal photo is deleted on decision (the export shows when).</li>
-<li><strong>Reports you filed.</strong></li>
+<li><strong>Reports you filed</strong> — and, for an intimate-image report, the two statements you confirmed when you filed it.</li>
 <li><strong>Reports about you</strong> — reports against your profile, polls or stories: what was alleged, when, and how a person resolved it. Never who reported you. Reports on private chat messages are not listed, because the date would identify the reporter; any resulting action is shown.</li>
 <li><strong>Moderation decisions about you</strong> — content removals, report outcomes and account-standing changes, with dates, and the outcome code for each. Never the moderator&#39;s identity or anything they typed.</li>
 <li><strong>AI moderation checks</strong> — every time the automated screen flagged or blocked something you wrote (the excerpt, the verdict, the categories and reason), plus a count of how many pieces of content passed.</li>
