@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /turnstile/
 
 Sitemap: https://getgassed.app/sitemap.xml

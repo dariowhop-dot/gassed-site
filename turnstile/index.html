@@ -1,0 +1,53 @@
+<!doctype html>
+<!--
+  Cloudflare Turnstile host page for the gassed app (the phone-number step of
+  sign-in and sign-up). Turnstile has no native SDK and its widget only runs
+  on an allowed hostname, so the app opens this page in a WebView
+  (src/components/auth/turnstile-gate.tsx in the app repo) and reads the token
+  back through window.ReactNativeWebView.postMessage; Supabase Auth then
+  verifies that token with Cloudflare. This is THE ONE EXCEPTION to "this site
+  requests nothing from anyone else": the widget script from
+  challenges.cloudflare.com, which is what runs the bot check. No account data
+  reaches this page. It is not linked from the site, is noindex, and
+  robots.txt disallows it. In a normal browser it also posts to window.parent,
+  so it can be tried in an iframe. Messages, as JSON strings:
+    {type:'turnstile-ready'} {type:'turnstile', token}
+    {type:'turnstile-error', code} {type:'turnstile-expired'}
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="dark">
+<title>Quick check — gassed</title>
+<style>
+html,body{margin:0;height:100%;background:#1c1c1e}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden}
+#t{width:100%}
+</style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstile" async defer></script>
+<script>
+var FALLBACK_KEY = '0x4AAAAAAFDTC5I3lg92SuVc';
+function post(msg) {
+  var s = JSON.stringify(msg);
+  if (window.ReactNativeWebView) window.ReactNativeWebView.postMessage(s);
+  if (window.parent !== window) window.parent.postMessage(s, '*');
+}
+function onTurnstile() {
+  var q = new URLSearchParams(location.search).get('sitekey') || '';
+  turnstile.render('#t', {
+    sitekey: /^[0-9A-Za-z_-]{1,64}$/.test(q) ? q : FALLBACK_KEY,
+    theme: 'dark',
+    size: 'flexible',
+    callback: function (token) { post({ type: 'turnstile', token: token }); },
+    'error-callback': function (code) { post({ type: 'turnstile-error', code: String(code || '') }); return true; },
+    'expired-callback': function () { post({ type: 'turnstile-expired' }); }
+  });
+  post({ type: 'turnstile-ready' });
+}
+</script>
+</head>
+<body><div id="t"></div></body>
+</html>

@@ -162,7 +162,7 @@ table are part of it.</p>
 <td>Your phone number; the one-time code we text you</td>
 <td>Contract — Article 6(1)(b). We cannot give you an account without an account</td>
 <td>Until you delete your account. Deletion is immediate and cascades through the database</td>
-<td>Supabase (our hosting); Twilio (sends the text) — note A</td>
+<td>Supabase (our hosting); Twilio (sends the text) — note A; Cloudflare (a bot check before the text is sent) — note Q</td>
 </tr>
 <tr>
 <td>2</td>
@@ -388,6 +388,16 @@ limited or banned is kept separately, until a person lifts it or you delete
 your account. If you tap a helpline number or link on our support card, your
 phone&#39;s own dialler, mail or browser app opens. We do not send anything to
 those organisations and do not record that you tapped.</p>
+<p><strong>Q — Cloudflare Turnstile.</strong> Before we text you a code, a short bot check
+runs on the phone-number screen, so that a script cannot make us send
+thousands of texts. It is Cloudflare&#39;s Turnstile, loaded inside the app from
+a page we host at getgassed.app/turnstile/. Cloudflare sees what any website
+you visit sees — your IP address and characteristics of the browser view that
+runs the check — and uses them to decide whether you look like a person. It
+is not told your phone number, your name or your account id; the check runs
+before any of those are sent anywhere. The result is a one-time token that
+the app hands to Supabase together with the request for your code, and
+Supabase checks it with Cloudflare. We do not store the token.</p>
 <hr>
 <h2 id="part-4-where-your-data-is-kept-and-who-we-send-it-to">Part 4 — Where your data is kept, and who we send it to</h2>
 <p><span class="tbc">[to be confirmed before launch]</span></p>
@@ -409,6 +419,11 @@ those organisations and do not record that you tapped.</p>
 <td>Twilio (through Supabase Auth)</td>
 <td>Your phone number, the code</td>
 <td>Processor (sub-processor of Supabase) — <span class="tbc">[to be confirmed before launch]</span></td>
+</tr>
+<tr>
+<td>Cloudflare (Turnstile)</td>
+<td>A bot check on the phone-number screen: your IP address and characteristics of the browser view that runs it. Not your phone number, name or account id — note Q</td>
+<td>Processor — <span class="tbc">[to be confirmed before launch]</span></td>
 </tr>
 <tr>
 <td>Google (Gemini API)</td>
@@ -585,7 +600,7 @@ exist in the app for anyone.</li>
       <a href="/terms/">Terms</a>
       <a href="/privacy/">Privacy</a>
     </nav>
-    <p class="legal">© 2026 gassed. UK only, 13+, iOS. Coming soon to the App Store. This website sets no cookies, runs no analytics and makes no requests to anyone else.</p>
+    <p class="legal">© 2026 gassed. UK only, 13+, iOS. Coming soon to the App Store. This website sets no cookies, runs no analytics and makes no requests to anyone else — except the app’s sign-in bot check at /turnstile/, which loads Cloudflare Turnstile.</p>
   </div>
 </footer>
 </body>
