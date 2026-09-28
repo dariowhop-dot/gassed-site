@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>gassed — Join the waitlist</title>
-<meta name="description" content="gassed is the positive-polls app for your school: anonymous votes on compliments-only questions, for UK pupils and students aged 13 and over. Join the waitlist and we’ll email you when it’s on the App Store.">
+<title>gassed</title>
+<meta name="description" content="gassed, the positive-polls app for UK schools. Leave your number and we’ll text you the second it’s on the App Store.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)">
@@ -14,8 +14,8 @@
 <link rel="stylesheet" href="/assets/site.css">
 <meta property="og:site_name" content="gassed">
 <meta property="og:type" content="website">
-<meta property="og:title" content="gassed — Join the waitlist">
-<meta property="og:description" content="gassed is the positive-polls app for your school: anonymous votes on compliments-only questions, for UK pupils and students aged 13 and over. Join the waitlist and we’ll email you when it’s on the App Store.">
+<meta property="og:title" content="gassed">
+<meta property="og:description" content="gassed, the positive-polls app for UK schools. Leave your number and we’ll text you the second it’s on the App Store.">
 <meta property="og:url" content="https://getgassed.app/">
 </head>
 <body class="">
@@ -32,39 +32,29 @@
   <span class="pill">Coming soon to the App Store</span>
   <h1 class="wordmark">gassed</h1>
   <p class="tagline">Place your vote.</p>
-  <p class="lead">The positive-polls app for your school. Anonymous votes on compliments-only questions, for pupils and students in the UK aged 13 and over. iOS.</p>
 </section>
-<section class="waitlist card" id="waitlist" aria-labelledby="waitlist-title">
+<section class="waitlist card" id="waitlist" aria-label="Get a text when gassed launches">
   <form id="waitlist-form" action="https://xosiwwqzzmgutvyiyqku.supabase.co/functions/v1/waitlist" method="post" novalidate>
-    <h2 id="waitlist-title">Join the waitlist</h2>
-    <p class="intro">One email from us when gassed is on the App Store, and nothing else. Add your school and we’ll know where to launch first.</p>
     <div class="field">
-      <label for="wl-email">Email</label>
-      <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" spellcheck="false" placeholder="you@example.com">
+      <label for="wl-name">Name</label>
+      <input id="wl-name" name="name" type="text" autocomplete="name" required maxlength="60">
     </div>
     <div class="field">
-      <label for="wl-school">School or college <span class="muted">(optional)</span></label>
-      <input id="wl-school" name="school" type="text" autocomplete="organization" maxlength="120" placeholder="Your school’s name">
+      <label for="wl-phone">Mobile number</label>
+      <input id="wl-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="07…">
     </div>
     <div class="hp" aria-hidden="true">
       <label for="wl-website">Website</label>
       <input id="wl-website" name="website" type="text" tabindex="-1" autocomplete="off">
     </div>
-    <button class="btn" type="submit">Join the waitlist</button>
+    <button class="btn" type="submit">Text me when it’s out</button>
     <p class="status" id="waitlist-status" role="status" aria-live="polite"></p>
-    <p class="small muted fine">You need to be 13 or over. We use your email to tell you when gassed launches and for nothing else; to come off the list, email <a href="mailto:support@getgassed.app">support@getgassed.app</a>. Row 15 of the <a href="/privacy/#part-3-what-we-collect-why-and-for-how-long">privacy notice</a> has the detail.</p>
+    <p class="small muted fine">13+, UK only. One text, nothing else. <a href="/privacy/#part-3-what-we-collect-why-and-for-how-long">Privacy</a>.</p>
   </form>
   <div class="done" id="waitlist-done" tabindex="-1" hidden>
-    <h2>You’re on the list.</h2>
-    <p>We’ll email you when gassed is on the App Store. Until then, tell your friends: it’s a better app when your whole year is on it.</p>
+    <h2>We’ll text you the second we’re on the App Store.</h2>
   </div>
 </section>
-<ul class="facts">
-  <li>Every poll is a compliment. Questions come from a fixed list; the one short blank a pupil can fill in is checked before a poll is created.</li>
-  <li>Votes are anonymous to everyone using the app. Real names everywhere else, and no photos anywhere.</li>
-  <li>A date-of-birth and selfie age check before an account exists. Report and block on every poll, story, message and profile.</li>
-</ul>
-<p class="muted for-adults">Parents, teachers and schools: the <a href="/safety/">safety page</a> explains what the app is, what it cannot do, and how to ask us for a takedown or a pause.</p>
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -79,7 +69,7 @@
       <a href="/terms/">Terms</a>
       <a href="/privacy/">Privacy</a>
     </nav>
-    <p class="legal">© 2026 gassed. UK only, 13+, iOS. Coming soon to the App Store. This website sets no cookies, runs no analytics and makes no requests to anyone else — except the waitlist form on the home page, which sends the email address and school you type to Supabase (who host our database, in London), and the app’s sign-in bot check at /turnstile/, which loads Cloudflare Turnstile.</p>
+    <p class="legal">© 2026 gassed. UK only, 13+, iOS. Coming soon to the App Store. This website sets no cookies, runs no analytics and makes no requests to anyone else — except the waitlist form on the home page, which sends the name and mobile number you type to Supabase (who host our database, in London), and the app’s sign-in bot check at /turnstile/, which loads Cloudflare Turnstile.</p>
   </div>
 </footer>
 <script>
@@ -88,13 +78,23 @@
   var status = document.getElementById('waitlist-status');
   var done = document.getElementById('waitlist-done');
   var button = form.querySelector('button[type="submit"]');
-  var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var messages = {
-    invalid_email: 'That email address doesn’t look right. Check it and try again.',
-    too_many_attempts: 'Too many tries from this connection. Wait a minute, then try again.',
-    server_error: 'Something went wrong at our end. Try again in a moment, or email support@getgassed.app.',
-    offline: 'Couldn’t reach us. Check your connection and try again, or email support@getgassed.app.'
+    invalid_name: 'Enter your name.',
+    invalid_phone: 'Enter a UK mobile number, like 07123 456789.',
+    too_many_attempts: 'Too many tries. Wait a minute, then try again.',
+    server_error: 'Something went wrong. Try again in a moment.',
+    offline: 'Couldn’t reach us. Check your connection and try again.'
   };
+  // A UK mobile as +447xxxxxxxxx, or null. Same rule as the server.
+  function ukMobile(value) {
+    var digits = String(value || '').replace(/[\s().-]/g, '');
+    if (digits.charAt(0) === '+') digits = digits.slice(1);
+    else if (digits.indexOf('00') === 0) digits = digits.slice(2);
+    if (!/^\d+$/.test(digits)) return null;
+    if (/^07\d{9}$/.test(digits)) digits = '44' + digits.slice(1);
+    else if (/^440\d{10}$/.test(digits)) digits = '44' + digits.slice(3);
+    return /^447\d{9}$/.test(digits) ? '+' + digits : null;
+  }
   function say(text, bad) {
     status.textContent = text;
     status.classList.toggle('bad', !!bad);
@@ -112,22 +112,24 @@
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    var email = form.elements.email.value.trim();
-    if (!pattern.test(email)) {
-      say('Enter a full email address, like name@example.com.', true);
-      form.elements.email.focus();
+    var name = form.elements.name.value.trim();
+    var phone = ukMobile(form.elements.phone.value);
+    if (!name) {
+      say(messages.invalid_name, true);
+      form.elements.name.focus();
+      return;
+    }
+    if (!phone) {
+      say(messages.invalid_phone, true);
+      form.elements.phone.focus();
       return;
     }
     button.disabled = true;
-    say('Adding you…');
+    say('One sec…');
     fetch(form.action, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        school: form.elements.school.value.trim(),
-        website: form.elements.website.value
-      })
+      body: JSON.stringify({ name: name, phone: phone, website: form.elements.website.value })
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (body) {
         if (response.ok) finish();
