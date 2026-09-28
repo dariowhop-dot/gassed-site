@@ -891,3 +891,107 @@ main.wrap {
     border-color: #ccc;
   }
 }
+
+/* ---------- Waitlist (landing, while the app is in review) ---------- */
+
+.waitlist {
+  position: relative;
+  max-width: 34rem;
+  margin: 0 0 2.5rem;
+  padding: 1.5rem;
+}
+
+.waitlist h2 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+}
+
+.waitlist .intro {
+  color: var(--text-2);
+  margin: 0 0 1.25rem;
+}
+
+.waitlist .field {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+}
+
+.waitlist label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.waitlist input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.6rem 0.9rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg-el);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+}
+
+.waitlist input::placeholder {
+  color: var(--text-2);
+  opacity: 0.7;
+}
+
+.waitlist input:focus-visible {
+  border-color: var(--accent);
+}
+
+.waitlist .btn {
+  width: 100%;
+  margin-top: 0.25rem;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.waitlist .btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.waitlist .status {
+  margin: 0.75rem 0 0;
+  font-weight: 600;
+}
+
+.waitlist .status:empty {
+  display: none;
+}
+
+.waitlist .status.bad {
+  color: var(--danger);
+}
+
+.waitlist .fine {
+  margin: 1rem 0 0;
+}
+
+/* Honeypot: off-screen for people, present for bots. */
+.waitlist .hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.waitlist .done:focus {
+  outline: none;
+}
+
+.waitlist .done p:last-child {
+  margin-bottom: 0;
+}
+
+.for-adults {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+}
